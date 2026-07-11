@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("bookvault")
@@ -20,6 +21,15 @@ public class BookController {
     @GetMapping("/api/v1/books")
     public List<BookResponseDTO> getAllBooks(){
         return service.getAllBooks();
+    }
+
+    @GetMapping("/api/v1/books/{id}")
+    public ResponseEntity<BookResponseDTO> getBook(@PathVariable("id") int id){
+        BookResponseDTO response = service.getBook(id);
+        if(response == null){
+            throw new NoSuchElementException();
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/api/v1/books")

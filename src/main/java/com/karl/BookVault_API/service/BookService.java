@@ -27,6 +27,17 @@ public class BookService {
         return response;
     }
 
+    public BookResponseDTO getBook(int id){
+        Book book = repository.findById(id).orElse(null);
+        if(book == null){
+            return null;
+        }
+        else{
+            BookResponseDTO response = new BookResponseDTO(book.getTitle(), book.getAuthor(), book.getCategory(), book.getPrice(), book.getStatus());
+            return response;
+        }
+    }
+
     public void addBook(BookRequestDTO requestDTO){
         Book book = new Book();
         book.setTitle(requestDTO.getTitle());
