@@ -38,4 +38,13 @@ public class BookController {
         return new ResponseEntity<>("Book Added", HttpStatus.CREATED);
     }
 
+    @PutMapping("/api/v1/books/{id}")
+    public ResponseEntity<String> editBook(@PathVariable("id") int id, @RequestBody BookRequestDTO requestDTO){
+        boolean updated = service.editBook(id, requestDTO);
+        if(!updated){
+            throw new NoSuchElementException();
+        }
+        return new ResponseEntity<>("Edited Book", HttpStatus.OK);
+    }
+
 }

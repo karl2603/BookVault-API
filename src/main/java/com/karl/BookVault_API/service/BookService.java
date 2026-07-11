@@ -50,4 +50,19 @@ public class BookService {
         book.setCreatedAt(LocalDateTime.now());
         repository.save(book);
     }
+
+    public boolean editBook(int id, BookRequestDTO requestDTO){
+        Book book = repository.findById(id).orElse(null);
+        if(book == null){
+            return false;
+        }
+        book.setTitle(requestDTO.getTitle());
+        book.setAuthor(requestDTO.getAuthor());
+        book.setIsbn(requestDTO.getIsbn());
+        book.setCategory(requestDTO.getCategory());
+        book.setPrice(requestDTO.getPrice());
+        book.setPublishedYear(requestDTO.getPublishedYear());
+        repository.save(book);
+        return true;
+    }
 }
