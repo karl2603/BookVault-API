@@ -1,6 +1,7 @@
 package com.karl.BookVault_API.dto.request;
 
 import jakarta.persistence.Column;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Positive;
@@ -25,6 +26,6 @@ public class BookRequestDTO {
     private String category;
     @Positive(message = "Enter a valid price!")
     private double price;
-    @NotBlank(message = "Published Year is required!")
+    @Min(value = 1500, message = "Enter a valid published year")
     private int publishedYear;
 }
