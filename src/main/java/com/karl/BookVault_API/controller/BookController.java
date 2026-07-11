@@ -47,4 +47,13 @@ public class BookController {
         return new ResponseEntity<>("Edited Book", HttpStatus.OK);
     }
 
+    @DeleteMapping("/api/v1/books/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable("id") int id){
+        boolean deleted = service.deleteBook(id);
+        if(!deleted){
+            throw new NoSuchElementException();
+        }
+        return new ResponseEntity<>("Book Deleted", HttpStatus.NO_CONTENT);
+    }
+
 }

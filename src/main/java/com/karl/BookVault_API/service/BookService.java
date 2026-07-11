@@ -65,4 +65,15 @@ public class BookService {
         repository.save(book);
         return true;
     }
+
+    public boolean deleteBook(int id){
+        Book book = repository.findById(id).orElse(null);
+        if(book == null){
+            return false;
+        }
+        else{
+            repository.delete(book);
+            return true;
+        }
+    }
 }
